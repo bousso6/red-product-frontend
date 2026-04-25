@@ -1,0 +1,7 @@
+body{
+    font-family: roboto, serif;
+     background: url(images/back.png);
+}
+.inp input{
+    outline: none;
+}

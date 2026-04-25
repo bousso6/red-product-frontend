@@ -1,0 +1,172 @@
+body{
+    font-family: roboto, serif;
+    background-size: cover;
+}
+
+/* @media (max-width:600px) {
+    .nav{
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        text-align: center;
+    }
+} */
+
+.back{
+    background: url(images/back.png);
+    background-size: cover;
+}
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+ }
+ .slide{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 75%;
+    height: 100%;
+    z-index: 9999;
+    overflow-y: auto;
+    background-color: white;
+ }
+
+ .slides{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100vh;
+    z-index: 999;
+    overflow-y: scroll;
+    background-color: white;
+ }
+ h1{
+    font-weight: 800;
+    text-align: right;
+    padding: 10px 0;
+    padding-right: 30px;
+    pointer-events: none;
+ }
+ ul li{
+    list-style: none;
+ }
+ ul li a{
+    font-weight: 500;
+    padding: 5px 0;
+    display: block;
+    text-transform: capitalize;
+    text-decoration: none;
+    transition: 0.2s ease-out;
+ }
+
+ ul li a i{
+    width: 40px;
+    text-align: center;
+ }
+
+
+.inp input{
+    display: none;
+    visibility: hidden;
+    appearance: none;
+}
+
+
+.toggle{
+position: fixed;
+height: 30px;
+width: 30px;
+z-index: 1;
+cursor: pointer;
+top: 10px;
+left: 5px;
+border-radius: 2px;
+
+}
+.toggles{
+position: fixed;
+height: 30px;
+width: 30px;
+z-index: 1;
+cursor: pointer;
+top: 20px;
+left: 5px;
+border-radius: 2px;
+
+}
+.toggle .common{
+    position: absolute;
+    height: 2px;
+    width: 20px;
+    background-color: black;
+    border-radius: 50px;
+    transition: o.3s ease;
+}
+.toggle .top-line{
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.toggle .middle-line{
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.toggle .bottom-line{
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+input:checked ~ .toggle .top-line{
+    left: 2px;
+    top: 14px;
+    width: 25px;
+    transform: rotate(45deg);
+}
+input:checked ~ .toggle .bottom-line{
+    left: 2px;
+    top: 14px;
+    width: 25px;
+    transform: rotate(-45deg);
+}
+input:checked ~ .toggle .middle-line{
+    opacity: 0;
+    transform: translateX(20px);
+}
+input:checked ~ .slide{
+    transform: translateX(0);
+    box-shadow: 0 0 15px rgba(0,0,0.5);
+    display: block;
+}
+
+
+.toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 5px 0;
+    transition: 0.4s;
+}
+
+/* état actif → devient un X */
+#menu-label.active .top-line {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+#menu-label.active .middle-line {
+    opacity: 0;
+}
+
+#menu-label.active .bottom-line {
+    transform: rotate(-45deg) translate(6px, -6px);
+}

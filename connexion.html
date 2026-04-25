@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet volkeno1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="">
+    <div class="container1 relative bg-[url(/images/back.png)] w-full h-[100vh]">
+        <div class="container2 absolute inset-0 bg-black/75"></div>
+        <div class="formulaire flex flex-col justify-center items-center justify-start min-h-[100vh] m-0">
+            <div class="titre relative z-10 flex items-center gap-3 pb-6">
+                <i class="fa-chisel fa-regular fa-bookmark fa-xl" style="color: white;"></i>
+                <h2 class=" titre2 text-white font-bold text-l">RED PRODUCT</h2>
+            </div>
+           <form id="login-form">
+    <div class="relative bg-white px-4 py-5">
+        <p class="text-sm pb-2">Connectez-vous en tant que Admin</p>
+        <div class="inp flex flex-col rounded rounded-l">
+            <input id="login-email" class="border-b border-b-solid border-b-gray-300 pt-[15px] pb-3 outline-none" type="email" placeholder="Email">
+            <input id="login-password" class="border-b border-b-solid border-b-gray-300 pt-[15px] pb-3 outline-none" type="password" placeholder="Mot de passe">
+            <div class="flex pt-5 gap-2">
+                <input class="w-[8%] border border-gray-700 rounded outline-none" type="checkbox">
+                <p class="text-sm">Gardez-moi connecté</p>
+            </div>
+        </div>
+        <div class="bg-[#45484B] text-white text-center py-1 w-full mt-7 rounded">
+            <button type="submit">Se connecter</button>
+        </div>
+    </div>
+</form>
+            <p class="pt-3 text-[#FFD964] relative text-sm font-semibold"> <a href="oublie.html">Mot de passe oublié ?</a></p>
+            <p class="text-white relative text-sm pt-2">Vous n'avez pas de compte? <span class="text-[#FFD964] font-semibold"><a href="inscrire.html">S'inscrire</a></span></p>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+
+</html>

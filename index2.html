@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet volkeno1</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=browse" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+
+    <!-- MENU TOGGLE -->
+    <Label class="md:hidden relative inset-0 z-[9999]" id="menu-label">
+        <div class="toggle">
+            <span class="top-line common"></span>
+            <span class="middle-line common"></span>
+            <span class="bottom-line common"></span>
+        </div>
+    </Label>
+
+    <div class="slide hidden fixed top-0 left-0 w-[80%] h-full z-[9998] back">
+        <div class=" w-full z-10 bg-black/75  h-[730px] ">
+            <div class="relative z-10 w-full"></div>
+            <div class="go">
+                <div class=" flex items-center gap-3 px-5 pb-2 mb-4 pt-12">
+                    <i class="fa-chisel fa-regular fa-bookmark fa-xl" style="color: white;"></i>
+                    <h2 class=" titre2 text-white font-bold text-l">RED PRODUCT</h2>
+                </div>
+                <ul>
+                    <li class="text-white relative px-5 py-1 mb-4 text-sm">Principal</li>
+                    <div class="text-white relative flex items-center gap-3 px-5 py-2 mb-4 w-full">
+                        <span class="material-symbols-outlined">browse</span>
+                        <li class="text-sm"><a href="index2.html">Dashboard</a></li>
+                    </div>
+                    <div class="text-white relative flex items-center gap-3 mx-auto px-5 py-2 mb-4 bg-white">
+                        <i class="fa-solid fa-display text-black"></i>
+                        <li class="text-sm text-black"><a href="index.html">Listes des hôtels</a></li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- SIDEBAR -->
+    <aside class="w-64 fixed top-0 left-0 h-screen hidden md:block z-[999] overflow-y-auto">
+        <div class="relative w-full h-[100vh] hidden md:block back fixed">
+            <div class="absolute inset-0 bg-black/75"></div>
+            <div class="">
+                <div class="titre relative z-10 flex items-center gap-3 px-5 pb-2 mb-2 pt-5">
+                    <i class="fa-chisel fa-regular fa-bookmark fa-xl" style="color: white;"></i>
+                    <h2 class=" titre2 text-white font-bold text-l">RED PRODUCT</h2>
+                </div>
+                <p class="text-white relative px-5 py-1 mb-2 text-sm">Principal</p>
+                <div class="text-white relative flex items-center gap-3 px-5 py-2 bg-white">
+                    <span class="material-symbols-outlined text-black">browse</span>
+                    <p class="text-sm text-black"><a href="index2.html">Dashboard</a></p>
+                </div>
+                <div class="text-white relative flex items-center gap-3 px-5 py-2  w-full mb-2">
+                    <i class="fa-solid fa-display "></i>
+                    <p class="text-sm "><a href="index.html">Listes des hôtels</a></p>
+                </div>
+            </div>
+
+            <!-- STATUT EN LIGNE -->
+                <div class="absolute bottom-0 w-full p-4 border-t border-white/20 z-10">
+                    <div class="flex items-center gap-3">
+                        <img class="border rounded-[50%] w-[40px] h-[40px] object-cover" src="images/homme.png" alt="">
+                        <div>
+                            <p id="nom-user" class="text-white text-sm font-semibold"></p>
+                            <p class="text-white/60 text-xs"> <span class="w-0 h-0">🟢</span>En ligne</p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+    </aside>
+
+
+    <!-- HEADER -->
+    <div class=" flex-1 ml-0 md:ml-64 pt-32 md:pt-16 overflow-y-auto z-1">
+        <header class="fixed shadow-lg top-0 right-0 left-0 md:left-64 z-[990] bg-white border-b border-gray-100">
+
+            <div class="w-full px-4 md:px-12 py-3">
+                <div class="flex flex-row justify-between items-center gap-4">
+
+                    <h2 class="text-lg md:text-xl font-semibold text-gray-800 truncate flex-shrink ml-10 md:ml-0">
+                        Dashboard
+                    </h2>
+
+                    <div class="flex items-center gap-3 md:gap-6 flex-shrink-0">
+
+                        <div class="hidden sm:block relative">
+                            <input
+                                class="border border-gray-300 rounded-full py-1.5 px-4 pr-10 outline-none text-sm focus:border-blue-400 focus:ring-1 focus:ring-blue-100 transition-all w-40 md:w-64"
+                                type="text" placeholder="Rechercher...">
+                            <i
+                                class="fa-solid fa-magnifying-glass absolute right-3.5 top-2.5 text-gray-400 text-xs"></i>
+                        </div>
+
+                        <div class="relative cursor-pointer hover:text-blue-600 transition-colors">
+                            <i class="fa-regular fa-bell text-gray-600 text-lg"></i>
+                            <span
+                                class="absolute -top-1 -right-1.5 bg-red-500 w-2.5 h-2.5 rounded-full border-2 border-white"></span>
+                        </div>
+
+                        <div class="w-9 h-9 md:w-11 md:h-11 flex-shrink-0">
+                            <img class="rounded-full w-full h-full object-cover border-2 border-gray-200 shadow-inner"
+                                src="images/homme.png" alt="Profil">
+                        </div>
+
+                        <a href="connexion.html" class="text-gray-500 hover:text-red-500 transition-colors p-1"
+                            title="Se déconnecter">
+                            <i class="fa-solid fa-arrow-right-from-bracket text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border border-b-gray-200">
+
+            <div class="flex flex-col items-start px-4 md:px-12 py-3 bg-gray-50 border-t border-gray-100">
+                <h3 class="text-2xl md:text-2xl font-light text-gray-700 ">Bienvenue sur RED Product
+                </h3>
+                <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+        </header>
+
+        <div class="">
+            <main class="relative pt-1 md:pt-16">
+                <div class="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3  px-2 py-12 w-full">
+                    <div class="pb-6 flex flex-row gap-2 items-center bg-gray-100 m-3 p-2 rounded-xl">
+                        <div class="rounded-[50%] w-12 h-12 bg-[rgb(168,138,221)] text-center flex items-center p-4 ">
+                            <i class="fa-regular fa-envelope" style="color: rgb(236, 235, 230);"></i>
+                        </div>
+                        <div class="">
+                            <p class="text-sm  font-extralight"><span class="text-3xl font-light">150</span>
+                                Formulaires</p>
+                            <p class="text-sm font-semibold text-gray-500">Je ne sais pas quoi mettre</p>
+                        </div>
+                    </div>
+                    <div class="pb-6 flex flex-row gap-2 items-center m-3 p-2 rounded-xl bg-gray-100">
+                        <div class="rounded-[50%] w-12 h-12 bg-[rgb(12,194,170)] text-center flex items-center p-3 ">
+                            <p class="font-semibold text-l text-white p-1">P</p>
+                        </div>
+                        <div class="">
+                            <p class="text-sm  font-extralight"><span class="text-3xl font-light">40</span> Messages
+                            </p>
+                            <p class="text-sm font-semibold text-gray-500">Je ne sais pas quoi mettre</p>
+                        </div>
+                    </div>
+                    <div class="pb-6 flex flex-row gap-2  items-center m-3 p-2 rounded-xl bg-gray-100">
+                        <div class="rounded-[50%] w-12 h-12 bg-[rgb(252,196,14)] text-center flex items-center">
+                            <i class="fa-regular fa-user flex p-4" style="color: rgb(236, 235, 230);"></i>
+                        </div>
+                        <div class="">
+                            <p class="text-sm  font-extralight"><span class="text-3xl font-light">600</span>
+                                Utilisateurs</p>
+                            <p class="text-sm font-semibold text-gray-500">Je ne sais pas quoi mettre</p>
+                        </div>
+                    </div>
+                    <div class="pb-6 flex flex-row gap-2 items-center m-3 p-2 rounded-xl bg-gray-100">
+                        <div class="rounded-[50%] w-12 h-12 bg-[rgb(249,0,0)] text-center flex items-center px-4">
+                            <i class="fa-regular fa-envelope" style="color: rgb(236, 235, 230);"></i>
+                        </div>
+                        <div class="">
+                            <p class="text-sm  font-extralight"><span class="text-3xl font-light">25</span> E-mails
+                            </p>
+                            <p class="text-sm font-semibold text-gray-500">Je ne sais pas quoi mettre</p>
+                        </div>
+                    </div>
+                    <div class="pb-6 flex flex-row gap-2 items-center m-3 p-2 rounded-xl bg-gray-100">
+                        <div class="rounded-[50%] w-12 h-12 bg-[rgb(156,39,176)] text-center flex items-center p-3">
+                            <p class="font-semibold text-l text-white p-1">P</p>
+                        </div>
+                        <div class="">
+                            <p class="text-sm  font-extralight"><span class="text-3xl font-light">40 </span>Hôtels
+                            </p>
+                            <p class="text-sm font-semibold text-gray-500">Je ne sais pas quoi mettre</p>
+                        </div>
+                    </div>
+                    <div class="pb-6 flex flex-row gap-2 items-center m-3 p-2 rounded-xl bg-gray-100 mb-8">
+                        <div class="rounded-[50%] w-12 h-12 bg-[rgb(21,101,192)] text-center flex items-center">
+                            <i class="fa-regular fa-user flex p-4" style="color: rgb(236, 235, 230);"></i>
+                        </div>
+                        <div class="">
+                            <p class="text-sm  font-extralight"><span class="text-3xl font-light">2</span> Entités
+                            </p>
+                            <p class="text-sm font-semibold text-gray-500">Je ne sais pas quoi mettre</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+<html>
