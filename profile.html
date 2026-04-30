@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil - RED PRODUCT</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
+            
+            <!-- Photo de profil -->
+            <div class="flex flex-col items-center mb-6">
+                <div class="relative">
+                    <img id="profil-photo" src="images/homme.png" 
+                        class="w-24 h-24 rounded-full object-cover border-4 border-gray-200 shadow-md">
+                    <label for="photo-profil-input" 
+                        class="absolute bottom-0 right-0 bg-gray-800 text-white rounded-full w-8 h-8 flex items-center justify-center cursor-pointer hover:bg-gray-600">
+                        <i class="fa-solid fa-camera text-xs"></i>
+                    </label>
+                    <input type="file" id="photo-profil-input" class="hidden" accept="image/*">
+                </div>
+                <h2 id="profil-nom" class="text-xl font-bold mt-4 text-gray-800"></h2>
+                <p id="profil-email" class="text-gray-500 text-sm"></p>
+            </div>
+
+            <hr class="mb-6">
+
+            <!-- Formulaire -->
+            <form id="profil-form">
+                <div class="flex flex-col gap-4">
+                    <div>
+                        <label class="text-sm font-semibold text-gray-600">Nom</label>
+                        <input id="input-nom" type="text" 
+                            class="w-full border border-gray-300 rounded-lg p-2 mt-1 outline-none focus:border-blue-400">
+                    </div>
+                    <div>
+                        <label class="text-sm font-semibold text-gray-600">Email</label>
+                        <input id="input-email" type="email" 
+                            class="w-full border border-gray-300 rounded-lg p-2 mt-1 outline-none focus:border-blue-400">
+                    </div>
+                    <div>
+                        <label class="text-sm font-semibold text-gray-600">Nouveau mot de passe</label>
+                        <input id="input-password" type="password" placeholder="Laisser vide pour ne pas changer"
+                            class="w-full border border-gray-300 rounded-lg p-2 mt-1 outline-none focus:border-blue-400">
+                    </div>
+                </div>
+
+                <button type="submit" 
+                    class="w-full bg-gray-800 text-white py-2 rounded-lg mt-6 hover:bg-gray-600 transition">
+                    Sauvegarder
+                </button>
+            </form>
+
+            <a href="index.html" class="block text-center text-sm text-gray-500 mt-4 hover:text-gray-800">
+                ← Retour
+            </a>
+        </div>
+    </div>
+
+    <script src="profil.js"></script>
+</body>
+</html>
