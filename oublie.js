@@ -27,3 +27,24 @@ if (oublieForm) {
         }
     });
 }
+
+
+const controller = new AbortController();
+const timeout = setTimeout(() => controller.abort(), 60000); // 60 secondes
+
+try {
+    const response = await fetch('https://red-product-backend-mkzn.onrender.com/api/auth/forgot-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+        signal: controller.signal
+    });
+    clearTimeout(timeout);
+    // ... reste du code
+} catch (err) {
+    if (err.name === 'AbortError') {
+        alert('Le serveur met du temps à répondre, réessayez dans quelques secondes !');
+    } else {
+        alert('Erreur lors de l\'envoi !');
+    }
+}
