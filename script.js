@@ -287,3 +287,8 @@ async function chargerNotifications() {
         console.error('Erreur notifications:', err);
     }
 }
+
+// Charger la photo de profil
+const savedPhoto = localStorage.getItem('photo');
+const profilImg = document.getElementById('profil-img');
+if (savedPhoto && profilImg) profilImg.src = savedPhoto;
