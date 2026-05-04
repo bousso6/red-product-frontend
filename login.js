@@ -26,12 +26,26 @@ if (loginForm) {
                 // Rediriger vers la page principale
                 window.location.href = 'index.html';
             } else {
-                alert(data.message);
+                // Succès
+                showToast('Hôtel créé avec succès !', 'success');
+
+                // Erreur
+                showToast('Erreur !', 'error');
+
+                // Info
+                showToast('Message info', 'info');
             }
 
         } catch (err) {
             console.error('Erreur:', err);
-            alert('Erreur de connexion !');
+            // Succès
+            showToast('Hôtel créé avec succès !', 'success');
+
+            // Erreur
+            showToast('Erreur !', 'error');
+
+            // Info
+            showToast('Message info', 'info');
         }
     });
 }

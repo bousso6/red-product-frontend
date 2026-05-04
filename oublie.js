@@ -28,7 +28,14 @@ if (oublieForm) {
             const data = await response.json();
 
             btnEnvoyer.textContent = 'Email envoyé ✅';
-            alert('Email envoyé ! Vérifiez votre boîte mail 😊');
+            // Succès
+            showToast('Hôtel créé avec succès !', 'success');
+
+            // Erreur
+            showToast('Erreur !', 'error');
+
+            // Info
+            showToast('Message info', 'info');
 
         } catch (err) {
             console.error('Erreur:', err);
@@ -36,7 +43,14 @@ if (oublieForm) {
             btnEnvoyer.disabled = false;
             btnEnvoyer.textContent = 'Envoyer';
 
-            alert('Erreur: ' + err.message);
+            // Succès
+            showToast('Hôtel créé avec succès !', 'success');
+
+            // Erreur
+            showToast('Erreur !', 'error');
+
+            // Info
+            showToast('Message info', 'info');
         }
     });
 }

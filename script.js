@@ -88,7 +88,14 @@ if (form) {
 
         } catch (err) {
             console.error('Erreur:', err);
-            alert('Impossible d\'enregistrer l\'hôtel. Vérifiez votre backend.');
+            // Succès
+            showToast('Hôtel créé avec succès !', 'success');
+
+            // Erreur
+            showToast('Erreur !', 'error');
+
+            // Info
+            showToast('Message info', 'info');
         }
     });
 }
@@ -104,10 +111,10 @@ async function chargerHotels() {
 
         if (listeHotels) {
             listeHotels.innerHTML = '';
-           hotels.forEach(hotel => {
-    const imageSrc = hotel.photo.startsWith('http') ? hotel.photo : `https://red-product-backend-mkzn.onrender.com/${hotel.photo}`;
+            hotels.forEach(hotel => {
+                const imageSrc = hotel.photo.startsWith('http') ? hotel.photo : `https://red-product-backend-mkzn.onrender.com/${hotel.photo}`;
 
-    listeHotels.innerHTML += `
+                listeHotels.innerHTML += `
         <div onclick="voirDetail(${JSON.stringify(hotel).replace(/"/g, '&quot;')})" 
             class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow cursor-pointer">
             <img src="${imageSrc}" class="w-full h-48 object-cover" 
@@ -119,7 +126,7 @@ async function chargerHotels() {
             </div>
         </div>
     `;
-});
+            });
         }
     } catch (err) {
         console.error('Erreur chargement:', err);
@@ -128,12 +135,12 @@ async function chargerHotels() {
 
 // Cette fonction doit être GLOBALE (pas dans DOMContentLoaded)
 function voirDetail(hotel) {
-    const imageSrc = !hotel.photo || hotel.photo === '' 
-    ? 'images/image.png' 
-    : hotel.photo.startsWith('http') 
-        ? hotel.photo 
-        : `https://red-product-backend-mkzn.onrender.com/${hotel.photo}`;
-        
+    const imageSrc = !hotel.photo || hotel.photo === ''
+        ? 'images/image.png'
+        : hotel.photo.startsWith('http')
+            ? hotel.photo
+            : `https://red-product-backend-mkzn.onrender.com/${hotel.photo}`;
+
     document.getElementById('detail-nom').textContent = hotel.nom;
     document.getElementById('detail-photo').src = imageSrc;
     document.getElementById('detail-adresse').textContent = hotel.adresse;
@@ -141,7 +148,7 @@ function voirDetail(hotel) {
     document.getElementById('detail-telephone').textContent = hotel.telephone;
     document.getElementById('detail-prix').textContent = hotel.prix;
     document.getElementById('detail-devise').textContent = hotel.devise;
-    
+
     document.getElementById('detail-overlay').classList.remove('hidden');
 }
 
@@ -156,7 +163,14 @@ async function supprimerHotel(id) {
             await fetch(`https://red-product-backend-mkzn.onrender.com/api/hotels/${id}`, {
                 method: 'DELETE'
             });
-            alert('Hôtel supprimé !');
+            // Succès
+            showToast('Hôtel créé avec succès !', 'success');
+
+            // Erreur
+            showToast('Erreur !', 'error');
+
+            // Info
+            showToast('Message info', 'info');
             chargerHotels();
         } catch (err) {
             console.error('Erreur:', err);
@@ -168,7 +182,7 @@ async function supprimerHotel(id) {
 async function modifierHotel(id) {
     const nom = prompt('Nouveau nom :');
     const prix = prompt('Nouveau prix :');
-    
+
     try {
         await fetch(`https://red-product-backend-mkzn.onrender.com/api/hotels/${id}`, {
             method: 'PUT',
@@ -188,29 +202,29 @@ const searchInput = document.querySelector('input[placeholder="Rechercher..."]')
 if (searchInput) {
     searchInput.addEventListener('input', async (e) => {
         const recherche = e.target.value.toLowerCase();
-        
+
         try {
             const response = await fetch('https://red-product-backend-mkzn.onrender.com/api/hotels');
             const hotels = await response.json();
-            
-            const hotelsFiltres = hotels.filter(hotel => 
+
+            const hotelsFiltres = hotels.filter(hotel =>
                 hotel.nom.toLowerCase().includes(recherche) ||
                 hotel.adresse.toLowerCase().includes(recherche)
             );
-            
+
             const listeHotels = document.querySelector('.hotel-list');
             listeHotels.innerHTML = '';
-            
+
             if (hotelsFiltres.length === 0) {
                 listeHotels.innerHTML = '<p class="text-gray-500 p-4">Aucun hôtel trouvé</p>';
                 return;
             }
-            
+
             hotelsFiltres.forEach(hotel => {
-                const imageSrc = !hotel.photo || hotel.photo === '' 
-                    ? 'images/image.png' 
-                    : hotel.photo.startsWith('http') 
-                        ? hotel.photo 
+                const imageSrc = !hotel.photo || hotel.photo === ''
+                    ? 'images/image.png'
+                    : hotel.photo.startsWith('http')
+                        ? hotel.photo
                         : `https://red-product-backend-mkzn.onrender.com/${hotel.photo}`;
 
                 listeHotels.innerHTML += `
@@ -237,7 +251,7 @@ if (searchInput) {
 function toggleNotifications() {
     const dropdown = document.getElementById('notif-dropdown');
     dropdown.classList.toggle('hidden');
-    
+
     // Réinitialiser le compteur
     document.getElementById('notif-count').classList.add('hidden');
     localStorage.setItem('notif-seen', 'true');

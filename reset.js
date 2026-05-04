@@ -8,7 +8,14 @@ if (resetForm) {
         const confirmPassword = document.getElementById('confirm-password').value;
 
         if (newPassword !== confirmPassword) {
-            alert('Les mots de passe ne correspondent pas !');
+            // Succès
+            showToast('Hôtel créé avec succès !', 'success');
+
+            // Erreur
+            showToast('Erreur !', 'error');
+
+            // Info
+            showToast('Message info', 'info');
             return;
         }
 
@@ -26,15 +33,36 @@ if (resetForm) {
             const data = await response.json();
 
             if (response.ok) {
-                alert('Mot de passe réinitialisé avec succès !');
+                // Succès
+                showToast('Hôtel créé avec succès !', 'success');
+
+                // Erreur
+                showToast('Erreur !', 'error');
+
+                // Info
+                showToast('Message info', 'info');
                 window.location.href = 'connexion.html';
             } else {
-                alert(data.message);
+                // Succès
+                showToast('Hôtel créé avec succès !', 'success');
+
+                // Erreur
+                showToast('Erreur !', 'error');
+
+                // Info
+                showToast('Message info', 'info');
             }
 
         } catch (err) {
             console.error('Erreur:', err);
-            alert('Erreur lors de la réinitialisation !');
+            // Succès
+            showToast('Hôtel créé avec succès !', 'success');
+
+            // Erreur
+            showToast('Erreur !', 'error');
+
+            // Info
+            showToast('Message info', 'info');
         }
     });
 }

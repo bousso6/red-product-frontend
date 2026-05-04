@@ -22,15 +22,36 @@ if (registerForm) {
             const data = await response.json();
 
             if (response.ok) {
-                alert('Compte créé avec succès !');
+                // Succès
+                showToast('Hôtel créé avec succès !', 'success');
+
+                // Erreur
+                showToast('Erreur !', 'error');
+
+                // Info
+                showToast('Message info', 'info');
                 window.location.href = 'connexion.html';
             } else {
-                alert(data.message);
+                // Succès
+                showToast('Hôtel créé avec succès !', 'success');
+
+                // Erreur
+                showToast('Erreur !', 'error');
+
+                // Info
+                showToast('Message info', 'info');
             }
 
         } catch (err) {
             console.error('Erreur:', err);
-            alert('Erreur lors de l\'inscription !');
+            // Succès
+            showToast('Hôtel créé avec succès !', 'success');
+
+            // Erreur
+            showToast('Erreur !', 'error');
+
+            // Info
+            showToast('Message info', 'info');
         }
     });
 }
