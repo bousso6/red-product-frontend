@@ -7,33 +7,36 @@ if (oublieForm) {
 
         const email = document.getElementById('oublie-email').value;
 
-        // Désactiver le bouton et changer le texte
         btnEnvoyer.disabled = true;
         btnEnvoyer.textContent = 'Envoi en cours...';
 
         try {
             const response = await fetch('https://red-product-backend-mkzn.onrender.com/api/auth/forgot-password', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({ email })
             });
 
+            // 👉 Vérifie si la réponse est valide
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText);
+            }
+
             const data = await response.json();
 
-            if (response.ok) {
-                btnEnvoyer.textContent = 'Email envoyé ✅';
-                alert('Email envoyé ! Vérifiez votre boîte mail 😊');
-            } else {
-                btnEnvoyer.disabled = false;
-                btnEnvoyer.textContent = 'Envoyer';
-                alert(data.message);
-            }
+            btnEnvoyer.textContent = 'Email envoyé ✅';
+            alert('Email envoyé ! Vérifiez votre boîte mail 😊');
 
         } catch (err) {
             console.error('Erreur:', err);
+
             btnEnvoyer.disabled = false;
             btnEnvoyer.textContent = 'Envoyer';
-            alert('Erreur lors de l\'envoi !');
+
+            alert('Erreur: ' + err.message);
         }
     });
 }
