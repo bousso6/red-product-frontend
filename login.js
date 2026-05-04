@@ -20,32 +20,20 @@ if (loginForm) {
             const data = await response.json();
 
             if (response.ok) {
-                // Sauvegarder le token
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('nom', data.nom);
-                // Rediriger vers la page principale
-                window.location.href = 'index.html';
+                localStorage.setItem('email', email);
+                showToast('Connexion réussie !', 'success');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
             } else {
-                // Succès
-                showToast('Hôtel créé avec succès !', 'success');
-
-                // Erreur
-                showToast('Erreur !', 'error');
-
-                // Info
-                showToast('Message info', 'info');
+                showToast(data.message || 'Email ou mot de passe incorrect !', 'error');
             }
 
         } catch (err) {
             console.error('Erreur:', err);
-            // Succès
-            showToast('Hôtel créé avec succès !', 'success');
-
-            // Erreur
-            showToast('Erreur !', 'error');
-
-            // Info
-            showToast('Message info', 'info');
+            showToast('Erreur de connexion !', 'error');
         }
     });
 }

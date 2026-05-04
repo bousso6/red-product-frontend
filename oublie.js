@@ -13,44 +13,23 @@ if (oublieForm) {
         try {
             const response = await fetch('https://red-product-backend-mkzn.onrender.com/api/auth/forgot-password', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
             });
 
-            // 👉 Vérifie si la réponse est valide
             if (!response.ok) {
                 const errorText = await response.text();
                 throw new Error(errorText);
             }
 
-            const data = await response.json();
-
             btnEnvoyer.textContent = 'Email envoyé ✅';
-            // Succès
-            showToast('Hôtel créé avec succès !', 'success');
-
-            // Erreur
-            showToast('Erreur !', 'error');
-
-            // Info
-            showToast('Message info', 'info');
+            showToast('Email envoyé ! Vérifiez votre boîte mail 😊', 'success');
 
         } catch (err) {
             console.error('Erreur:', err);
-
             btnEnvoyer.disabled = false;
             btnEnvoyer.textContent = 'Envoyer';
-
-            // Succès
-            showToast('Hôtel créé avec succès !', 'success');
-
-            // Erreur
-            showToast('Erreur !', 'error');
-
-            // Info
-            showToast('Message info', 'info');
+            showToast('Erreur lors de l\'envoi !', 'error');
         }
     });
 }

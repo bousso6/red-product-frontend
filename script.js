@@ -3,6 +3,7 @@ const token = localStorage.getItem('token');
 if (!token) {
     window.location.href = 'connexion.html';
 }
+
 // Afficher le nom de l'utilisateur
 const nom = localStorage.getItem('nom');
 const nomUser = document.getElementById('nom-user');
@@ -57,7 +58,6 @@ if (form) {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Utilisation de FormData pour envoyer le fichier image
         const formData = new FormData();
         formData.append('nom', document.getElementById('nom').value);
         formData.append('adresse', document.getElementById('adresse').value);
@@ -67,42 +67,26 @@ if (form) {
         formData.append('devise', document.getElementById('devise').value);
 
         const photoInput = document.getElementById('photo-input');
-        if (photoInput.files[0]) {
+        if (photoInput && photoInput.files[0]) {
             formData.append('photo', photoInput.files[0]);
         }
 
         try {
             const response = await fetch('https://red-product-backend-mkzn.onrender.com/api/hotels', {
                 method: 'POST',
-                // Important : Ne PAS définir de Content-Type ici
                 body: formData
             });
 
             if (!response.ok) throw new Error('Erreur lors de la création');
 
-            // Succès
             showToast('Hôtel créé avec succès !', 'success');
-
-            // Erreur
-            showToast('Erreur !', 'error');
-
-            // Info
-            showToast('Message info', 'info');
-
             form.reset();
-            overlay.classList.add('hidden'); // Fermer la modale
-            chargerHotels(); // Actualiser la liste
+            overlay.classList.add('hidden');
+            chargerHotels();
 
         } catch (err) {
             console.error('Erreur:', err);
-            // Succès
-            showToast('Hôtel créé avec succès !', 'success');
-
-            // Erreur
-            showToast('Erreur !', 'error');
-
-            // Info
-            showToast('Message info', 'info');
+            showToast('Impossible d\'enregistrer l\'hôtel !', 'error');
         }
     });
 }
@@ -118,21 +102,27 @@ async function chargerHotels() {
 
         if (listeHotels) {
             listeHotels.innerHTML = '';
-            hotels.forEach(hotel => {
-                const imageSrc = hotel.photo.startsWith('http') ? hotel.photo : `https://red-product-backend-mkzn.onrender.com/${hotel.photo}`;
+            // Inverser pour afficher les plus récents en premier
+            const hotelsInverses = [...hotels].reverse();
+            hotelsInverses.forEach(hotel => {
+                const imageSrc = !hotel.photo || hotel.photo === ''
+                    ? 'images/image.png'
+                    : hotel.photo.startsWith('http')
+                        ? hotel.photo
+                        : `https://red-product-backend-mkzn.onrender.com/${hotel.photo}`;
 
                 listeHotels.innerHTML += `
-        <div onclick="voirDetail(${JSON.stringify(hotel).replace(/"/g, '&quot;')})" 
-            class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow cursor-pointer">
-            <img src="${imageSrc}" class="w-full h-48 object-cover" 
-                onerror="this.src='images/image.png'">
-            <div class="p-4">
-                <p class="text-xs text-pink-500 font-semibold mb-1">${hotel.adresse}</p>
-                <h3 class="font-bold text-xl text-gray-800 mb-2">${hotel.nom}</h3>
-                <span class="text-gray-900 font-bold">${hotel.prix} ${hotel.devise} / nuit</span>
-            </div>
-        </div>
-    `;
+                    <div onclick="voirDetail(${JSON.stringify(hotel).replace(/"/g, '&quot;')})" 
+                        class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow cursor-pointer">
+                        <img src="${imageSrc}" class="w-full h-48 object-cover" 
+                            onerror="this.src='images/image.png'">
+                        <div class="p-4">
+                            <p class="text-xs text-pink-500 font-semibold mb-1">${hotel.adresse}</p>
+                            <h3 class="font-bold text-xl text-gray-800 mb-2">${hotel.nom}</h3>
+                            <span class="text-gray-900 font-bold">${hotel.prix} ${hotel.devise} / nuit</span>
+                        </div>
+                    </div>
+                `;
             });
         }
     } catch (err) {
@@ -140,7 +130,9 @@ async function chargerHotels() {
     }
 }
 
-// Cette fonction doit être GLOBALE (pas dans DOMContentLoaded)
+// ==========================================
+// 4. VOIR DÉTAILS
+// ==========================================
 function voirDetail(hotel) {
     const imageSrc = !hotel.photo || hotel.photo === ''
         ? 'images/image.png'
@@ -163,29 +155,27 @@ function fermerDetail() {
     document.getElementById('detail-overlay').classList.add('hidden');
 }
 
-// Supprimer un hôtel
+// ==========================================
+// 5. SUPPRIMER UN HÔTEL
+// ==========================================
 async function supprimerHotel(id) {
     if (confirm('Voulez-vous supprimer cet hôtel ?')) {
         try {
             await fetch(`https://red-product-backend-mkzn.onrender.com/api/hotels/${id}`, {
                 method: 'DELETE'
             });
-            // Succès
-            showToast('Hôtel créé avec succès !', 'success');
-
-            // Erreur
-            showToast('Erreur !', 'error');
-
-            // Info
-            showToast('Message info', 'info');
+            showToast('Hôtel supprimé !', 'success');
             chargerHotels();
         } catch (err) {
             console.error('Erreur:', err);
+            showToast('Erreur lors de la suppression !', 'error');
         }
     }
 }
 
-// Modifier un hôtel
+// ==========================================
+// 6. MODIFIER UN HÔTEL
+// ==========================================
 async function modifierHotel(id) {
     const nom = prompt('Nouveau nom :');
     const prix = prompt('Nouveau prix :');
@@ -196,14 +186,17 @@ async function modifierHotel(id) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nom, prix })
         });
-        alert('Hôtel modifié !');
+        showToast('Hôtel modifié !', 'success');
         chargerHotels();
     } catch (err) {
         console.error('Erreur:', err);
+        showToast('Erreur lors de la modification !', 'error');
     }
 }
 
-// Recherche des hôtels
+// ==========================================
+// 7. RECHERCHE
+// ==========================================
 const searchInput = document.querySelector('input[placeholder="Rechercher..."]');
 
 if (searchInput) {
@@ -214,7 +207,7 @@ if (searchInput) {
             const response = await fetch('https://red-product-backend-mkzn.onrender.com/api/hotels');
             const hotels = await response.json();
 
-            const hotelsFiltres = hotels.filter(hotel =>
+            const hotelsFiltres = [...hotels].reverse().filter(hotel =>
                 hotel.nom.toLowerCase().includes(recherche) ||
                 hotel.adresse.toLowerCase().includes(recherche)
             );
@@ -253,13 +246,11 @@ if (searchInput) {
 }
 
 // ==========================================
-// NOTIFICATIONS
+// 8. NOTIFICATIONS
 // ==========================================
 function toggleNotifications() {
     const dropdown = document.getElementById('notif-dropdown');
     dropdown.classList.toggle('hidden');
-
-    // Réinitialiser le compteur
     document.getElementById('notif-count').classList.add('hidden');
     localStorage.setItem('notif-seen', 'true');
 }
@@ -277,17 +268,14 @@ async function chargerNotifications() {
             return;
         }
 
-        // Prendre les 5 derniers hôtels
-        const derniersHotels = hotels.slice(-5).reverse();
+        const derniersHotels = [...hotels].reverse().slice(0, 5);
         const seen = localStorage.getItem('notif-seen');
 
-        // Afficher le compteur
         if (!seen) {
             notifCount.textContent = derniersHotels.length;
             notifCount.classList.remove('hidden');
         }
 
-        // Afficher les notifications
         notifList.innerHTML = '';
         derniersHotels.forEach(hotel => {
             const date = new Date(hotel.createdAt).toLocaleDateString('fr-FR');
@@ -309,7 +297,9 @@ async function chargerNotifications() {
     }
 }
 
-// Charger la photo de profil
+// ==========================================
+// 9. PHOTO DE PROFIL
+// ==========================================
 const savedPhoto = localStorage.getItem('photo');
 const profilImg = document.getElementById('profil-img');
 if (savedPhoto && profilImg) profilImg.src = savedPhoto;

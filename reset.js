@@ -8,18 +8,10 @@ if (resetForm) {
         const confirmPassword = document.getElementById('confirm-password').value;
 
         if (newPassword !== confirmPassword) {
-            // Succès
-            showToast('Hôtel créé avec succès !', 'success');
-
-            // Erreur
-            showToast('Erreur !', 'error');
-
-            // Info
-            showToast('Message info', 'info');
+            showToast('Les mots de passe ne correspondent pas !', 'error');
             return;
         }
 
-        // Récupérer le token dans l'URL
         const urlParams = new URLSearchParams(window.location.search);
         const token = urlParams.get('token');
 
@@ -33,36 +25,17 @@ if (resetForm) {
             const data = await response.json();
 
             if (response.ok) {
-                // Succès
-                showToast('Hôtel créé avec succès !', 'success');
-
-                // Erreur
-                showToast('Erreur !', 'error');
-
-                // Info
-                showToast('Message info', 'info');
-                window.location.href = 'connexion.html';
+                showToast('Mot de passe réinitialisé avec succès !', 'success');
+                setTimeout(() => {
+                    window.location.href = 'connexion.html';
+                }, 1000);
             } else {
-                // Succès
-                showToast('Hôtel créé avec succès !', 'success');
-
-                // Erreur
-                showToast('Erreur !', 'error');
-
-                // Info
-                showToast('Message info', 'info');
+                showToast(data.message || 'Token invalide ou expiré !', 'error');
             }
 
         } catch (err) {
             console.error('Erreur:', err);
-            // Succès
-            showToast('Hôtel créé avec succès !', 'success');
-
-            // Erreur
-            showToast('Erreur !', 'error');
-
-            // Info
-            showToast('Message info', 'info');
+            showToast('Erreur lors de la réinitialisation !', 'error');
         }
     });
 }
