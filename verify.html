@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activation du compte - RED PRODUCT</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="container1 relative bg-[url(images/back.png)] w-full h-[100vh]">
+        <div class="container2 absolute inset-0 bg-black/75"></div>
+        <div class="formulaire flex flex-col justify-center items-center min-h-[100vh]">
+            <div class="titre relative z-10 flex items-center gap-3 pb-6">
+                <i class="fa-regular fa-bookmark fa-xl" style="color: white;"></i>
+                <h2 class="titre2 text-white font-bold text-l">RED PRODUCT</h2>
+            </div>
+            <div class="relative bg-white px-8 py-8 rounded text-center">
+                <div id="loading">
+                    <i class="fa-solid fa-spinner fa-spin text-4xl text-gray-500 mb-4"></i>
+                    <p class="text-gray-600">Activation en cours...</p>
+                </div>
+                <div id="success" class="hidden">
+                    <i class="fa-solid fa-circle-check text-4xl text-green-500 mb-4"></i>
+                    <h2 class="text-xl font-bold text-gray-800 mb-2">Compte activé !</h2>
+                    <p class="text-gray-500 mb-4">Votre compte a été activé avec succès.</p>
+                    <a href="connexion.html" class="bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-600">
+                        Se connecter
+                    </a>
+                </div>
+                <div id="error" class="hidden">
+                    <i class="fa-solid fa-circle-xmark text-4xl text-red-500 mb-4"></i>
+                    <h2 class="text-xl font-bold text-gray-800 mb-2">Erreur !</h2>
+                    <p class="text-gray-500 mb-4">Token invalide ou expiré.</p>
+                    <a href="inscrire.html" class="bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-600">
+                        S'inscrire à nouveau
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
+        async function verifierCompte() {
+            try {
+                const response = await fetch(`https://red-product-backend-mkzn.onrender.com/api/auth/verify/${token}`);
+                const data = await response.json();
+
+                document.getElementById('loading').classList.add('hidden');
+
+                if (response.ok) {
+                    document.getElementById('success').classList.remove('hidden');
+                } else {
+                    document.getElementById('error').classList.remove('hidden');
+                }
+            } catch (err) {
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('error').classList.remove('hidden');
+            }
+        }
+
+        if (token) {
+            verifierCompte();
+        } else {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('error').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
