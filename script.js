@@ -80,7 +80,14 @@ if (form) {
 
             if (!response.ok) throw new Error('Erreur lors de la création');
 
-            alert('Hôtel créé avec succès !');
+            // Succès
+            showToast('Hôtel créé avec succès !', 'success');
+
+            // Erreur
+            showToast('Erreur !', 'error');
+
+            // Info
+            showToast('Message info', 'info');
 
             form.reset();
             overlay.classList.add('hidden'); // Fermer la modale
